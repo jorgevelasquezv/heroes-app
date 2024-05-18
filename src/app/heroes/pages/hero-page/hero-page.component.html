@@ -1,1 +1,67 @@
-<p>hero-page works!</p>
+<ng-template #divLoading>
+  <mat-grid-list cols="1">
+    <mat-grid-tile>
+      <mat-spinner></mat-spinner>
+    </mat-grid-tile>
+  </mat-grid-list>
+</ng-template>
+
+<div *ngIf="hero; else divLoading" class="grid">
+  <mat-card class="col-12 sm:col-6 mt-2 p-2">
+    <mat-card-header>
+      <mat-card-title>{{ hero.alter_ego }}</mat-card-title>
+      <mat-card-subtitle>{{ hero.superhero }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <img [src]="hero | heroImage" [alt]="hero.superhero" mat-card-image />
+  </mat-card>
+
+  <mat-card class="col-12 sm:col-6 mt-2 p-2">
+    <mat-card-header>
+      <mat-card-title>Information</mat-card-title>
+      <mat-card-subtitle>{{ hero.superhero }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>
+          <strong>First appearance:</strong> {{ hero.first_appearance }}
+        </mat-list-item>
+        <mat-list-item>
+          <strong>Characters:</strong>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-chip-listbox>
+            <mat-chip *ngFor="let character of hero.characters.split(',')">
+              {{ character }}
+            </mat-chip>
+          </mat-chip-listbox>
+        </mat-list-item>
+        <mat-list-item>
+          <strong>Publisher:</strong> {{ hero.publisher }}
+        </mat-list-item>
+        <mat-list-item>
+          <strong>Alter ego:</strong> {{ hero.alter_ego }}
+        </mat-list-item>
+      </mat-list>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-actions>
+        <button
+          mat-button
+          mat-raised
+          color="primary"
+          [routerLink]="['/heroes/edit', hero.id]"
+        >
+          <mat-icon>edit</mat-icon>
+          <span>Edit</span>
+        </button>
+        <span class="spacer"></span>
+        <button mat-button mat-raised [routerLink]="['/heroes/list']">
+          <mat-icon>arrow_back</mat-icon>
+          <span>Back</span>
+        </button>
+      </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+</div>
