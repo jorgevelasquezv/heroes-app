@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Hero } from '../interfaces/hero.interface';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import { environments } from '../../../environments/enviroments';
 
 @Injectable({ providedIn: 'root' })
@@ -24,14 +24,24 @@ export class HeroesService {
   }
 
   public createHero(hero: Hero): Observable<Hero> {
+    hero.id = this.generateId();
     return this.http.post<Hero>(this.url, hero);
   }
 
   public updateHero(hero: Hero): Observable<Hero> {
-    return this.http.put<Hero>(`${this.url}/${hero.id}`, hero);
+    if (!hero.id) throw new Error('Hero id is required');
+    return this.http.patch<Hero>(`${this.url}/${hero.id}`, hero);
   }
 
-  public deleteHero(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.url}/${id}`);
+  public deleteHero(id: string): Observable<boolean> {
+    if (!id) throw new Error('Hero id is required');
+    return this.http.delete<void>(`${this.url}/${id}`).pipe(
+      map(() => true),
+      catchError(() => of(false))
+    );
+  }
+
+  private generateId(): string {
+    return Math.random().toString(36).substring(2, 9);
   }
 }

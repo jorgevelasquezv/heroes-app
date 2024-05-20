@@ -166,6 +166,24 @@
       "alter_ego": "Norrin Radd",
       "first_appearance": "The Fantastic Four #48",
       "characters": "Norrin Radd"
+    },
+    {
+      "id": "dc-isaac",
+      "superhero": "Isaac",
+      "publisher": "DC Comics",
+      "alter_ego": "Isaac el grande",
+      "first_appearance": "Isaac Comics 1",
+      "characters": "Isaac,newton",
+      "alt_img": "https://www.cinepremiere.com.mx/wp-content/uploads/2020/01/Ex-Machina-comic-708x1024.jpg"
+    },
+    {
+      "id": "3kewrlq",
+      "superhero": "Back Panther",
+      "publisher": "Marvel Comics",
+      "alter_ego": "Coal Tiger",
+      "first_appearance": "Fantastic Four #52",
+      "characters": "Black Panther",
+      "alt_img": "https://i.pinimg.com/736x/ae/11/6e/ae116edba92a40d309d4c66020f10f26.jpg"
     }
   ]
 }
